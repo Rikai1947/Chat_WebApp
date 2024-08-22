@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Room</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="chat-container">
+    <div class="header">
+      <h1>Chat Room</h1>
+      <div class="switch">
+        <input type="checkbox" id="dark-mode-switch">
+        <span></span>
+      </div>
+      <button id="exit-btn">Exit</button>
+    </div>
+    <div class="left-panel">
+      <div class="messages" id="left-messages"></div>
+      <div class="message-input">
+        <input type="text" id="left-message-input" placeholder="Type a message...">
+        <label for="left-file-input">📁</label>
+        <input type="file" id="left-file-input" class="file-input">
+        <button id="left-send-btn">Send</button>
+        <button id="left-send-voice-btn">Voice</button>
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="messages" id="right-messages"></div>
+      <div class="message-input">
+        <input type="text" id="right-message-input" placeholder="Type a message...">
+        <label for="right-file-input">📁</label>
+        <input type="file" id="right-file-input" class="file-input">
+        <button id="right-send-btn">Send</button>
+        <button id="right-send-voice-btn">Voice</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="code.js"></script>
+</body>
+</html>

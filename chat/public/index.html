@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="join-container">
+    <h2>Join Chat Room</h2>
+    <select id="left-username" required>
+      <option value="" disabled selected>Select left-side username</option>
+      <option value="Alice">Alice</option>
+      <option value="Bob">Bob</option>
+      <!-- Add more options as needed -->
+    </select>
+    <input type="file" id="left-avatar" accept="image/*">
+    
+    <select id="right-username" required>
+      <option value="" disabled selected>Select right-side username</option>
+      <option value="Charlie">Charlie</option>
+      <option value="Dave">Dave</option>
+      <!-- Add more options as needed -->
+    </select>
+    <input type="file" id="right-avatar" accept="image/*">
+    
+    <button id="join-btn">Join</button>
+  </div>
+
+  <script>
+    document.getElementById('join-btn').addEventListener('click', () => {
+      const leftUsername = document.getElementById('left-username').value;
+      const leftAvatar = document.getElementById('left-avatar').files[0];
+      const rightUsername = document.getElementById('right-username').value;
+      const rightAvatar = document.getElementById('right-avatar').files[0];
+
+      if (leftUsername && rightUsername) {
+        let leftAvatarUrl = '';
+        let rightAvatarUrl = '';
+
+        const leftReader = new FileReader();
+        leftReader.onload = () => {
+          leftAvatarUrl = leftReader.result || 'assets/default-avatar.png';
+          sessionStorage.setItem('leftUsername', leftUsername);
+          sessionStorage.setItem('leftAvatar', leftAvatarUrl);
+
+          const rightReader = new FileReader();
+          rightReader.onload = () => {
+            rightAvatarUrl = rightReader.result || 'assets/default-avatar.png';
+            sessionStorage.setItem('rightUsername', rightUsername);
+            sessionStorage.setItem('rightAvatar', rightAvatarUrl);
+
+            window.location.href = 'chat.html';
+          };
+
+          if (rightAvatar) {
+            rightReader.readAsDataURL(rightAvatar);
+          } else {
+            rightAvatarUrl = 'assets/default-avatar.png';
+            sessionStorage.setItem('rightUsername', rightUsername);
+            sessionStorage.setItem('rightAvatar', rightAvatarUrl);
+            window.location.href = 'chat.html';
+          }
+        };
+
+        if (leftAvatar) {
+          leftReader.readAsDataURL(leftAvatar);
+        } else {
+          leftAvatarUrl = 'assets/default-avatar.png';
+          sessionStorage.setItem('leftUsername', leftUsername);
+          sessionStorage.setItem('leftAvatar', leftAvatarUrl);
+          
+          if (rightAvatar) {
+            rightReader.readAsDataURL(rightAvatar);
+          } else {
+            rightAvatarUrl = 'assets/default-avatar.png';
+            sessionStorage.setItem('rightUsername', rightUsername);
+            sessionStorage.setItem('rightAvatar', rightAvatarUrl);
+            window.location.href = 'chat.html';
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
